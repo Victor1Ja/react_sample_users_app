@@ -36,9 +36,16 @@ export default function App() {
   };
   const addUser = async data => {
     const addUrl = `https://gorest.co.in/public/v2/users?access-token=${ACCESS_TOKEN}`;
-    const res = await fetch(addUrl, { ...data });
+    const res = await fetch(addUrl, {
+      body: JSON.stringify(data),
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
     // console.log(res);
-    if (res.status === 200) {
+    if (res.status === 201) {
       setCountAdd(countAdd + 1);
       setPage(1);
     }
